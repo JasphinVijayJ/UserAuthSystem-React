@@ -1,11 +1,12 @@
 # User Authentication System
 
-A full-stack user authentication system built with React frontend and Spring Boot backend, featuring JWT-based authentication, form validation, and protected routes.
+A full-stack user authentication system built with React frontend and Spring Boot backend, featuring JWT-based authentication, form validation, and protected routes. Now includes **Admin login** functionality.
 
 ## 🔥 Features
 
 ### Frontend
 - User registration and login forms with real-time validation
+- Admin and User role selection during login
 - Input field trimming and validation on every change
 - JWT token storage in localStorage for persistent sessions
 - Protected routes that require authentication
@@ -16,6 +17,7 @@ A full-stack user authentication system built with React frontend and Spring Boo
 ### Backend
 - Spring Boot REST API with JPA and MySQL
 - JWT token generation and validation
+- Role-based authentication (USER & ADMIN)
 - Comprehensive input validation using Spring Validation
 - Custom exception handling with appropriate HTTP status codes
 - Password confirmation matching
@@ -42,7 +44,7 @@ A full-stack user authentication system built with React frontend and Spring Boo
 
 ## 📝 Usage
 
-### Registration
+### Registration (User only)
 1. Navigate to `/register`.
 2. Fill in all required fields:
    - **Name:** Required.
@@ -52,15 +54,17 @@ A full-stack user authentication system built with React frontend and Spring Boo
    - **Confirm Password:** Must match the password.
 3. Submit the form to register. Validation occurs on every input change, and all fields are trimmed before sending.
 
-### Login
+### Login (User/Admin)
 1. Navigate to `/login`.
 2. Enter your registered **email** and **password**.
-3. On successful login:
+3. Select your **role** from the dropdown (`USER` or `ADMIN`).
+4. On successful login:
    - JWT token is stored in `localStorage`.
-   - User is redirected to the **Dashboard**.
+   - User is redirected to the **Dashboard** (or Admin dashboard based on role).
 
 ### Protected Access
 - **Dashboard** and other protected routes require valid authentication.
+- Admin-only routes are restricted to `ADMIN` role.
 - Unauthorized users are automatically redirected to the login page.
 - JWT token is automatically included in API requests to access protected endpoints.
 
@@ -83,7 +87,8 @@ frontend/
 │   ├── pages/
 │   │   ├── Login.jsx
 │   │   ├── Register.jsx
-│   │   └── Dashboard.jsx
+│   │   ├── Dashboard.jsx
+│   │   └── AdminDashboard.jsx
 │   ├── App.jsx
 │   ├── main.jsx
 │   └── styles/
@@ -128,3 +133,4 @@ backend/
 - JWT tokens expire **after 1 hour** by default.
 - Backend validates inputs and handles exceptions gracefully.
 - Frontend protects routes and automatically redirects unauthorized users.
+- Admin login allows access to admin-specific dashboards and features.

@@ -57,6 +57,23 @@ input:focus {
     margin: 6px 0 2px;
 }
 
+/* Role Dropdown */
+.role-select {
+    background-color: #2a2a2a;
+    color: white;
+    padding: 9px;
+    outline: none;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #444;
+    transition: border 0.2s ease-in-out;
+    margin-bottom: 30px;
+}
+
+.role-select:focus {
+    border: 1px solid #007bff;
+}
+
 /* Button */
 .button-1 {
     width: 170px;

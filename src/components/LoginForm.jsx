@@ -9,6 +9,7 @@ export default function LoginForm() {
     const [formData, setFormData] = useState({
         email: "",
         password: "",
+        role: "USER",   // default role
     });
 
     const [errors, setErrors] = useState({});
@@ -52,7 +53,12 @@ export default function LoginForm() {
         if (!canSubmit) return;
 
         try {
-            const response = await fetch("https://userauthsystem-springboot-production.up.railway.app/uas/user/login", {
+            // Choose URL based on environment
+            const baseURL = formData.role === "USER"
+                ? "http://localhost:8080/uas/user/login"
+                : "http://localhost:8080/uas/admin/login";
+
+            const response = await fetch(baseURL, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -61,7 +67,7 @@ export default function LoginForm() {
                 }),
             });
 
-            const fromBackEnd = await response.json(); // backend sends token and plain text
+            const fromBackEnd = await response.json(); // backend sends token and role and plain text
 
             if (!response.ok) {
                 // Backend validation failed → show exact error
@@ -69,12 +75,19 @@ export default function LoginForm() {
                 return;
             }
 
-            // Save JWT token in localStorage
+            // Save JWT token + role in localStorage
             localStorage.setItem("token", fromBackEnd.token);
+            localStorage.setItem("role", fromBackEnd.role);
 
-            // Success → Redirect to home page
             alert(fromBackEnd.message);
-            navigate("/home")   // <-- redirect here
+            // Success → Redirect based on role
+            if (fromBackEnd.role === "ADMIN") {
+                navigate("/admin");    // Admin HomePage
+            } else if (fromBackEnd.role === "USER") {
+                navigate("/user");     // User Homepage
+            } else {
+                navigate("/login");
+            }
 
         } catch (error) {
             setErrors({ submit: "Error: Server error. Please try again later." });
@@ -85,7 +98,7 @@ export default function LoginForm() {
     return (
         <>
             <form onSubmit={handleSubmit}>
-            <h2 className="heading-1">Login</h2>
+                <h2 className="heading-1">Login</h2>
 
                 <InputField label="Email"
                     type="email"
@@ -106,6 +119,14 @@ export default function LoginForm() {
                 />
                 <p className="error-message">{errors.password}</p>
 
+                {/* Role Dropdown */}
+                <label>Role</label>
+                <select className="role-select" name="role" value={formData.role} onChange={handleChange}>
+                    <option value="USER">User</option>
+                    <option value="ADMIN">Admin</option>
+                </select>
+
+                {/* Button and Error (<p>) and Link */}
                 <button className="button-1" type="submit">Login</button>
                 <p className="error-message">{errors.submit}</p>
 

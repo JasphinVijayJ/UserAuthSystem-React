@@ -74,7 +74,7 @@ export default function RegisterForm() {
         };
 
         try {
-            const response = await fetch("https://userauthsystem-springboot-production.up.railway.app/uas/user/register", {
+            const response = await fetch("http://locxt:8080/uas/user/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(finalFormData)
