@@ -43,6 +43,9 @@ export default function LoginForm() {
         };
 
         setErrors(newErrors);
+
+        // To check how many keys (fields) are inside an object, you should use: Object.keys(object).length
+
         setCanSubmit(Object.keys(newErrors).length === 0 && Object.keys(touched).length > 0);
     }, [formData, touched]);
 

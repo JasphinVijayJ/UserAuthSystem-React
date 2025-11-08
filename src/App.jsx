@@ -17,12 +17,12 @@ function App() {
 
       <Route path="/user" element={
         <PrivateRoute allowedRoles={["USER"]} >
-          <UserPage />
+          <UserPage />    {/* this is the children */}
         </PrivateRoute>} />
 
       <Route path="/admin" element={
         <PrivateRoute allowedRoles={["ADMIN"]} >
-          <AdminPage />
+          <AdminPage />   {/* this is the children */}
         </PrivateRoute>} />
     </Routes>
   )
