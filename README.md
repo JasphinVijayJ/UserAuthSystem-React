@@ -1,85 +1,66 @@
-# User Authentication System
+# 🔐 Full-Stack User Authentication System (React + Spring Boot + JWT)
 
-A full-stack user authentication system built with React frontend and Spring Boot backend, featuring JWT-based authentication, form validation, and protected routes. Now includes **Admin login** functionality.
+A complete **full-stack authentication system** built using **React (Vite)** for the frontend and **Spring Boot 3 + JWT** for the backend.  
+Supports **User Registration**, **User Login**, **Admin Login**, **JWT Token Authentication**, **Protected Routes**, and **Full Validation**.
 
-## 🔥 Features
+---
 
-### Frontend
-- User registration and login forms with real-time validation
-- Admin and User role selection during login
-- Input field trimming and validation on every change
-- JWT token storage in localStorage for persistent sessions
-- Protected routes that require authentication
-- Automatic redirect based on authentication status
-- Clean logout functionality
-- Responsive design with CSS styling
+# 🚀 Features
 
-### Backend
-- Spring Boot REST API with JPA and MySQL
-- JWT token generation and validation
-- Role-based authentication (USER & ADMIN)
-- Comprehensive input validation using Spring Validation
-- Custom exception handling with appropriate HTTP status codes
-- Password confirmation matching
-- Unique email and phone number validation
-- CORS configuration for React frontend
+## 🎨 Frontend (React)
+- 📝 User Registration with real-time validation
+- 🔐 User & Admin Login
+- ✂ Auto-trim input fields
+- 🎭 Role selection (USER / ADMIN)
+- 💼 JWT token stored in `localStorage`
+- 🔒 Protected Routes using custom components
+- 🔁 Auto Redirect if already logged in
+- 🚪 Logout clears token + redirects
+- 📱 Fully responsive design
 
-## 🛠 Technologies Used
+---
 
-### Frontend
-- **React** - React Hooks (`useState`, `useNavigate`)
-- **React Router DOM** - Routing and navigation
-- **CSS** - Styling
-- **localStorage** - Token persistence
-- **Fetch API** - HTTP requests
+## 🛡 Backend (Spring Boot + JWT)
+- Spring Boot 3.5.5 REST API
+- JWT Token Generation, Validation
+- Role-based authentication (ADMIN / USER)
+- Full validation using Jakarta Validation
+- Custom Exceptions + Global Exception Handler
+- Unique Email + Phone checks
+- Password confirmation validation
+- DTO-based clean API
+- MySQL Database
 
-### Backend
-- **Java 21** - Programming language
-- **Maven** - Dependency management
-- **Spring Boot 3.5.5** - Application framework
-- **Spring Data JPA** - Database operations
-- **MySQL** - Database
-- **JWT (jjwt)** - Token authentication
-- **Spring Validation** - Input validation
+---
 
-## 📝 Usage
+# 🧰 Tech Stack
 
-### Registration (User only)
-1. Navigate to `/register`.
-2. Fill in all required fields:
-   - **Name:** Required.
-   - **Phone:** Exactly 10 digits, must be unique.
-   - **Email:** Valid email format, must be unique.
-   - **Password:** Minimum 6 characters.
-   - **Confirm Password:** Must match the password.
-3. Submit the form to register. Validation occurs on every input change, and all fields are trimmed before sending.
+## Frontend
+- React (Vite)
+- React Router DOM
+- JavaScript (ES6+)
+- CSS
+- localStorage
+- Fetch API
 
-### Login (User/Admin)
-1. Navigate to `/login`.
-2. Enter your registered **email** and **password**.
-3. Select your **role** from the dropdown (`USER` or `ADMIN`).
-4. On successful login:
-   - JWT token is stored in `localStorage`.
-   - User is redirected to the **Dashboard** (or Admin dashboard based on role).
+## Backend
+- Java 21
+- Spring Boot 3.5.5
+- Spring Data JPA
+- MySQL
+- JWT (jjwt)
+- Jakarta Validation
+- Maven
 
-### Protected Access
-- **Dashboard** and other protected routes require valid authentication.
-- Admin-only routes are restricted to `ADMIN` role.
-- Unauthorized users are automatically redirected to the login page.
-- JWT token is automatically included in API requests to access protected endpoints.
+---
 
-### Logout
-- Click the **Logout** button to:
-  - Clear the JWT token from `localStorage`.
-  - Redirect back to the login page.
+# 📂 Project Structure
 
-## 📂 Project Structure
-
-### Frontend (React - VS Code)
-
+## Frontend (React)
+```
 frontend/
-│── public/
-│── src/
+├── public/
+├── src/
 │   ├── components/
 │   │   ├── InputField.jsx
 │   │   ├── LogoutButton.jsx
@@ -89,48 +70,176 @@ frontend/
 │   │   ├── Register.jsx
 │   │   ├── Dashboard.jsx
 │   │   └── AdminDashboard.jsx
+│   ├── styles/
+│   │   └── App.css
 │   ├── App.jsx
-│   ├── main.jsx
-│   └── styles/
-│       └── App.css
-│── package.json
-│── vite.config.js
+│   └── main.jsx
+├── package.json
+└── vite.config.js
+```
 
-### Backend (Spring Boot - STS)
+---
 
-backend/
-│── src/main/java/com/jasphin/uas/
-│   ├── controller/
-│   │   └── UserController.java
-│   ├── dto/
-│   │   ├── LoginRequest.java
-│   │   └── LoginResponse.java
-│   ├── enums/
-│   │   ├── Role.java
-│   │   ├── ErrorMessage.java
-│   │   └── SuccessMessage.java
-│   ├── exception/
-│   │   ├── GlobalExceptionHandler.java
-│   │   ├── EmailAlreadyExistsException.java
-│   │   ├── PhoneAlreadyExistsException.java
-│   │   ├── PasswordMismatchException.java
-│   │   ├── InvalidPasswordException.java
-│   │   └── UserNotFoundException.java
-│   ├── model/
-│   │   └── User.java
-│   ├── repository/
-│   │   └── UserRepository.java
-│   ├── security/
-│   │   └── JwtUtil.java
-│   └── service/
-│       └── UserService.java
-│── src/main/resources/
-│   ├── application.properties
-│── pom.xml
+## Backend (Spring Boot)
+```
+com.uas
+├── controller
+│   ├── AdminController.java
+│   └── UserController.java
+├── dto
+│   ├── LoginRequest.java
+│   └── LoginResponse.java
+├── enums
+│   ├── Role.java
+│   ├── ErrorMessage.java
+│   └── SuccessMessage.java
+├── exception
+│   ├── GlobalExceptionHandler.java
+│   ├── EmailAlreadyExistsException.java
+│   ├── PhoneAlreadyExistsException.java
+│   ├── PasswordMismatchException.java
+│   ├── UserNotFoundException.java
+│   └── InvalidPasswordException.java
+├── model
+│   ├── User.java
+│   └── Admin.java
+├── repository
+│   ├── UserRepository.java
+│   └── AdminRepository.java
+├── security
+│   └── JwtUtil.java
+└── service
+    ├── UserService.java
+    └── AdminService.java
+```
 
-## ⚡ Notes
+---
 
-- JWT tokens expire **after 1 hour** by default.
-- Backend validates inputs and handles exceptions gracefully.
-- Frontend protects routes and automatically redirects unauthorized users.
-- Admin login allows access to admin-specific dashboards and features.
+# 🌐 API Endpoints
+
+## User APIs → `/uas/user`
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/register` | Register new user |
+| POST | `/login` | User login |
+
+## Admin APIs → `/uas/admin`
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/login` | Admin login |
+
+---
+
+# 📝 Sample JSON
+
+## Registration
+```json
+{
+  "name": "John Doe",
+  "phone": "9876543210",
+  "email": "john@example.com",
+  "password": "password123",
+  "confirmPassword": "password123"
+}
+```
+
+## Login
+```json
+{
+  "email": "john@example.com",
+  "password": "password123"
+}
+```
+
+---
+
+# 🔑 JWT Login Response
+```json
+{
+  "token": "ey123....",
+  "role": "USER",
+  "message": "Login successful."
+}
+```
+
+---
+
+# ⚠️ Backend Error Handling
+
+| Status | Meaning |
+|--------|---------|
+| 400 | Invalid input / Validation failed |
+| 401 | Incorrect password |
+| 404 | User/Admin not found |
+| 409 | Email/Phone already exists |
+
+Handled by **GlobalExceptionHandler**.
+
+---
+
+# 🛠 How to Run
+
+## Backend (Spring Boot)
+
+### Configure MySQL
+`application.properties`:
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/uas_db
+spring.datasource.username=root
+spring.datasource.password=your_password
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+
+server.port=8080
+```
+
+### Run Backend
+```bash
+./mvnw spring-boot:run
+```
+
+Backend URL:
+```
+http://localhost:8080/uas
+```
+
+---
+
+## Frontend (React)
+
+### Install packages
+```bash
+npm install
+```
+
+### Run React App
+```bash
+npm run dev
+```
+
+Frontend URL:
+```
+http://localhost:5173
+```
+
+---
+
+# 🔒 Protected Routes (Frontend Behavior)
+- If not logged in → redirect to `/login`
+- If user role ≠ admin → block admin routes
+- JWT auto-attached to protected API requests
+
+---
+
+# ⚡ Notes
+- JWT expires in **1 hour**
+- Frontend trims all input values
+- Backend validates everything again (secure)
+- Admin login has separate dashboard
+
+---
+
+# 📝 Author
+**Jasphin Vijay J**  
+📧 *jasphinvijayj@gmail.com*
