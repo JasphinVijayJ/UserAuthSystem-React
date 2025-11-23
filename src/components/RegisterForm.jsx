@@ -6,6 +6,10 @@ export default function RegisterForm() {
 
     const navigate = useNavigate(); // ✅ for redirection
 
+    useEffect(() => {
+        document.title = "UserAuthSystem | Register";
+    }, []);
+
     const [formData, setFormData] = useState({
         name: "",
         phone: "",

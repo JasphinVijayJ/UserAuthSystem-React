@@ -6,6 +6,7 @@ import RegisterForm from "./components/RegisterForm";
 import PrivateRoute from "./components/common/PrivateRoute";
 import AdminPage from "./pages/AdminPage";
 
+import ForgotPasswordForm from "./components/forgot-password/ForgotPasswordForm";
 import './App.css'
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
     <Routes>
       <Route path="/register" element={<RegisterForm />} />
       <Route path="/login" element={<LoginForm />} />
+      <Route path="/forgot-password" element={<ForgotPasswordForm />} />
 
       <Route path="/user" element={
         <PrivateRoute allowedRoles={["USER"]} >

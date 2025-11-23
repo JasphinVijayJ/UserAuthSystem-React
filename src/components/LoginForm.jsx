@@ -6,6 +6,10 @@ export default function LoginForm() {
 
     const navigate = useNavigate();
 
+    useEffect(() => {
+        document.title = "UserAuthSystem | Login";
+    }, []);
+
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -45,7 +49,6 @@ export default function LoginForm() {
         setErrors(newErrors);
 
         // To check how many keys (fields) are inside an object, you should use: Object.keys(object).length
-
         setCanSubmit(Object.keys(newErrors).length === 0 && Object.keys(touched).length > 0);
     }, [formData, touched]);
 
@@ -134,6 +137,7 @@ export default function LoginForm() {
                 <p className="error-message">{errors.submit}</p>
 
                 <Link to={"/register"}>New User? Register</Link>
+                <Link to={"/forgot-password"}>Forgot Password?</Link>
             </form>
         </>
     )
